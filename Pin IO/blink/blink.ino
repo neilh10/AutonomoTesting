@@ -1,17 +1,26 @@
+
 void setup() 
 {
   //Wait for SerialUSB or 10 seconds
-  while ((!SerialUSB) && (millis() < 10000));
-  
+  pinMode(LED_BUILTIN, OUTPUT);
+  while ((!SerialUSB) && (millis() < 50000)) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(100);
+  };
+  delay(500);
   SerialUSB.println("Serial monitor opened...");
 
-  pinMode(LED_BUILTIN, OUTPUT);
-}
 
+}
+int led_loop=0;
 void loop() 
 {
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(500);
+  SerialUSB.print(led_loop++);
+  SerialUSB.println(" LED On");
+  delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
+  delay(1000);
 }
